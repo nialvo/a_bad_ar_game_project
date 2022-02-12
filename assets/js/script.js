@@ -84,6 +84,8 @@ navigator.mediaDevices.getUserMedia(constraints)
     setInterval(loop,25);
     ctx.fillStyle = "black";
     ctx.fillRect(midX,midY,100,250);
+    ctx.fillStyle = "red";
+    ctx.fillRect(midX/2,midY/2,100,250);
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
