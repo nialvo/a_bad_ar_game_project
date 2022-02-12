@@ -81,7 +81,7 @@ navigator.mediaDevices.getUserMedia(constraints)
   video.onloadedmetadata = function(e) {
     video.play();
     acl.start();
-    setInterval(loop,25);
+    //setInterval(loop,25);
     ctx.fillStyle = "black";
     ctx.fillRect(midX,midY,100,250);
     ctx.fillStyle = "red";
