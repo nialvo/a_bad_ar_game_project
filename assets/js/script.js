@@ -81,11 +81,17 @@ navigator.mediaDevices.getUserMedia(constraints)
   video.onloadedmetadata = function(e) {
     video.play();
     acl.start();
-    //setInterval(loop,25);
+
+    setInterval(loop,25);
+/*
+    ctx.clearRect(0,0,w,w);
+    let xx = Math.round(midX/2);
+    //let yy = Math.round(midY/2);
     ctx.fillStyle = "black";
-    ctx.fillRect(midX,midY,100,250);
+    ctx.fillRect(midX,midX,100,250);
     ctx.fillStyle = "red";
-    ctx.fillRect(midX/2,midY/2,100,250);
+    ctx.fillRect(xx,xx,100,250);
+*/
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
