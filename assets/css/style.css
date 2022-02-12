@@ -1,3 +1,26 @@
 .dimensionTitle, .dimensionValue{
     font-size:50px
 }
+
+.loader{
+    display:none;
+}
+
+
+#screen{
+    position:relative;
+}
+
+#video{
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:1;
+}
+
+#aug{
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:2;
+}
