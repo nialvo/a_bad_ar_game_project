@@ -20,9 +20,9 @@ let h = screen.height;
 let midX=Math.round(w);
 let midY=Math.round(h);
 video.setAttribute("width",w);
-video.setAttribute("height",h);
+video.setAttribute("height",w);
 canvas.setAttribute("width",w);
-canvas.setAttribute("height",h);
+canvas.setAttribute("height",w);
 let incX = Math.round(midX/5);
 let incY = Math.round(midY/5);
 
@@ -44,7 +44,7 @@ acl.addEventListener('reading', () => {
 function draw(){
 
     //clear previous drawing
-    ctx.clearRect(0,0,w,h);
+    ctx.clearRect(0,0,w,w);
 
     //draw 
     ctx.drawImage(gangst,pos[0], pos[1]);
@@ -55,15 +55,15 @@ function draw(){
 
 function loop(){
     pos[0]=midX-100-x*incX;
-    pos[1]=midY-250-(z-5)*incY;
+    pos[1]=midX-250-(z-5)*incX;
     draw();
 }
 
 const constraints = { 
     audio: false,
     video: { 
-        width: midX, 
-        height: midY,
+        width: w, 
+        height: w,
         facingMode: {
             exact: 'environment'
         }
