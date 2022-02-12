@@ -25,6 +25,8 @@ canvas.setAttribute("width",w);
 canvas.setAttribute("height",w);
 let incX = Math.round(midX/5);
 let incY = Math.round(midY/5);
+let xx = Math.round(midX/2);
+let yy = Math.round(midY/2);
 
 
 
@@ -44,7 +46,7 @@ acl.addEventListener('reading', () => {
 function draw(){
 
     //clear previous drawing
-    //ctx.clearRect(0,0,w,w);
+    ctx.clearRect(0,0,w,w);
 
     //draw 
     ctx.drawImage(gangst,pos[0], pos[1]);
@@ -86,12 +88,11 @@ navigator.mediaDevices.getUserMedia(constraints)
     video.play();
     acl.start();
 
-    //setInterval(loop,25);
+    setInterval(loop,25);
 
-    ctx.clearRect(0,0,w,w);
+    
 
-    let xx = Math.round(midX/2);
-    //let yy = Math.round(midY/2);
+   
     
 
   };
