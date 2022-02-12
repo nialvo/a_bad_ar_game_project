@@ -1,19 +1,29 @@
 
 //character position and rendering
 
+//position
 const X = document.getElementById("x");
 const Y = document.getElementById("y");
 const Z = document.getElementById("z");
 var x,y,z;
-
 let acl = new Accelerometer({frequency: 30});
 
+//canvas
+var ctx = canvas.getContext("2d");
+const gangst = document.getElementById("imageLoader").children;
+var gangsN = orbs.length;
+var pos = new Array(gangsN);
+let i=0;
 
 acl.addEventListener('reading', () => {
 
     x = Math.round(acl.x *10)/10;
     y = Math.round(acl.y *10)/10;
     z = Math.round(acl.z *10)/10;
+
+    pos[i][0]=640-x*60;
+    pos[i][1]=360+z*30;
+    draw();
 
     X.textContent= x;
     Y.textContent= y;
@@ -24,8 +34,7 @@ acl.addEventListener('reading', () => {
 acl.start();
 
 //character rendering
-const gangst = document.getElementById("imageLoader").children;
-let i=0;
+
 
 function draw(){
 
