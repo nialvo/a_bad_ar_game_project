@@ -25,8 +25,8 @@ acl.addEventListener('reading', () => {
     y = Math.round(acl.y *10)/10;
     z = Math.round(acl.z *10)/10;
 
-    pos[i][0]=640-x*60;
-    pos[i][1]=360-(z-5)*30;
+    pos[i][0]=640-x*6;
+    pos[i][1]=360-(z-5)*3;
     draw();
 
     X.textContent= x;
