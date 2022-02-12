@@ -14,6 +14,9 @@ var ctx = canvas.getContext("2d");
 const gangst = document.getElementById("imageLoader").children;
 var gangsN = gangst.length;
 var pos = new Array(gangsN);
+for(let k=O;k<gangsN;k++){
+    pos[k]= new Array(2);
+}
 let i=0;
 
 acl.addEventListener('reading', () => {
