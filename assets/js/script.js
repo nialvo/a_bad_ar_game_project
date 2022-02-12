@@ -34,8 +34,8 @@ acl.addEventListener('reading', () => {
 
 
 function loop(){
-    pos[0]=640-100-x*6;
-    pos[1]=360-250-(z-5)*3;
+    pos[0]=540-100-x*60;
+    pos[1]=990-250-(z-5)*30;
     draw();
 }
 
@@ -60,8 +60,11 @@ const video = document.querySelector('video');
 const constraints = { 
     audio: false,
     video: { 
-        width: 1280, 
-        height: 720,
+        width: 1080, 
+        height: 1980,
+        facingMode: {
+            exact: 'environment'
+        }
         
     } 
 };
@@ -73,7 +76,7 @@ navigator.mediaDevices.getUserMedia(constraints)
   video.onloadedmetadata = function(e) {
     video.play();
     acl.start();
-    setInterval(loop,250);
+    setInterval(loop,25);
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
