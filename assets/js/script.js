@@ -5,20 +5,19 @@
 const X = document.getElementById("x");
 const Y = document.getElementById("y");
 const Z = document.getElementById("z");
-var x,y,z;
+let x,y,z;
 let acl = new Accelerometer({frequency: 30});
 
 //canvas
-var canvas = document.getElementById("aug");
-var ctx = canvas.getContext("2d");
-ctx.globalAlpha=0.0;
-const gangst = document.getElementById("imageLoader").children;
-var gangsN = gangst.length;
-var pos = new Array(gangsN);
-for(let k=O;k<gangsN;k++){
-    pos[k]= new Array(2);
-}
+let canvas = document.getElementById("aug");
+let ctx = canvas.getContext("2d");
+ctx.globalAlpha=1;
+let gangst = document.getElementById("image1");
+let pos = [];
+
 let i=0;
+x=0;
+z=5;
 
 acl.addEventListener('reading', () => {
 
@@ -26,9 +25,8 @@ acl.addEventListener('reading', () => {
     y = Math.round(acl.y *10)/10;
     z = Math.round(acl.z *10)/10;
 
-    pos[i][0]=640-100-x*6;
-    pos[i][1]=360-250-(z-5)*3;
-    draw();
+
+    
 
     X.textContent= x;
     Y.textContent= y;
@@ -37,6 +35,13 @@ acl.addEventListener('reading', () => {
 });
 
 acl.start();
+setInterval(loop,25)
+
+function loop(){
+    pos[0]=640-100-x*6;
+    pos[1]=360-250-(z-5)*3;
+    draw();
+}
 
 //character rendering
 
@@ -44,10 +49,10 @@ acl.start();
 function draw(){
 
     //clear previous drawing
-    ctx.clearRect(0,0,1280,720);
+    //ctx.clearRect(0,0,1280,720);
 
     //draw 
-    ctx.drawImage(gangst[i],pos[i][0], pos[i][1]);
+    ctx.drawImage(gangst,pos[0], pos[1]);
 
 }
 
@@ -60,7 +65,10 @@ const constraints = {
     audio: false,
     video: { 
         width: 1280, 
-        height: 720 
+        height: 720,
+        facingMode: {
+            exact: 'environment'
+          }
     } 
 };
 
