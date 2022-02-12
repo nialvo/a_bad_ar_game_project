@@ -82,6 +82,8 @@ navigator.mediaDevices.getUserMedia(constraints)
     video.play();
     acl.start();
     setInterval(loop,25);
+    ctx.fillStyle = "black";
+    ctx.fillRect(midX,midY,100,250);
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
