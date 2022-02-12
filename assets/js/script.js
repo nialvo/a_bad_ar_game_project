@@ -44,7 +44,7 @@ acl.addEventListener('reading', () => {
 function draw(){
 
     //clear previous drawing
-    ctx.clearRect(0,0,1280,720);
+    ctx.clearRect(0,0,w,h);
 
     //draw 
     ctx.drawImage(gangst,pos[0], pos[1]);
