@@ -9,9 +9,10 @@ var x,y,z;
 let acl = new Accelerometer({frequency: 30});
 
 //canvas
+var canvas = document.getElementById("aug");
 var ctx = canvas.getContext("2d");
 const gangst = document.getElementById("imageLoader").children;
-var gangsN = orbs.length;
+var gangsN = gangst.length;
 var pos = new Array(gangsN);
 let i=0;
 
