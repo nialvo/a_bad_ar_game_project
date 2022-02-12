@@ -32,7 +32,7 @@ acl.addEventListener('reading', () => {
   
 });
 
-acl.start();
+
 /*
 setInterval(loop,250)
 
@@ -71,10 +71,11 @@ const constraints = {
 
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
-  
+
   video.srcObject = mediaStream;
   video.onloadedmetadata = function(e) {
     video.play();
+    acl.start();
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
