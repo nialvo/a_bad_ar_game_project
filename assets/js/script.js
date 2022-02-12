@@ -1,20 +1,30 @@
 
-//character position and rendering
 
-//position
 let X = document.getElementById("x");
 let Y = document.getElementById("y");
 let Z = document.getElementById("z");
 var x,y,z;
 let acl = new Accelerometer({frequency: 30});
 
-//canvas
 
-let canvas = document.getElementById("aug");
-let ctx = canvas.getContext("2d");
+
+const canvas = document.getElementById("aug");
+const ctx = canvas.getContext("2d");
 ctx.globalAlpha=1;
 let gangst = document.getElementById("image1");
 let pos = [];
+
+const video = document.querySelector('video');
+let w = screen.width;
+let h = screen.height;
+let midX=Math.round(w);
+let midY=Math.round(h);
+video.setAttribute("width",w);
+video.setAttribute("height",h);
+canvas.setAttribute("width",w);
+canvas.setAttribute("height",h);
+let incX = Math.round(midX/5);
+let incY = Math.round(midY/5);
 
 
 
@@ -31,17 +41,6 @@ acl.addEventListener('reading', () => {
 });
 
 
-
-
-function loop(){
-    pos[0]=540-100-x*60;
-    pos[1]=990-250-(z-5)*30;
-    draw();
-}
-
-//character rendering
-
-
 function draw(){
 
     //clear previous drawing
@@ -54,20 +53,26 @@ function draw(){
 
 
 
-//video feed
-const video = document.querySelector('video');
+function loop(){
+    pos[0]=midX-100-x*incX;
+    pos[1]=midY-250-(z-5)*incY;
+    draw();
+}
 
 const constraints = { 
     audio: false,
     video: { 
-        width: 1080, 
-        height: 1980,
+        width: midX, 
+        height: midY,
         facingMode: {
             exact: 'environment'
         }
         
     } 
 };
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
