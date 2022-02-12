@@ -54,7 +54,7 @@ function draw(){
     ctx.drawImage(gangst,pos[0], pos[1]);
 
 }
-
+*/
 
 
 //video feed
@@ -78,4 +78,3 @@ navigator.mediaDevices.getUserMedia(constraints)
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
-*/
