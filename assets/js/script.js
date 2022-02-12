@@ -11,6 +11,7 @@ let acl = new Accelerometer({frequency: 30});
 //canvas
 var canvas = document.getElementById("aug");
 var ctx = canvas.getContext("2d");
+ctx.globalAlpha=0.0;
 const gangst = document.getElementById("imageLoader").children;
 var gangsN = gangst.length;
 var pos = new Array(gangsN);
@@ -25,8 +26,8 @@ acl.addEventListener('reading', () => {
     y = Math.round(acl.y *10)/10;
     z = Math.round(acl.z *10)/10;
 
-    pos[i][0]=640-x*6;
-    pos[i][1]=360-(z-5)*3;
+    pos[i][0]=640-100-x*6;
+    pos[i][1]=360-250-(z-5)*3;
     draw();
 
     X.textContent= x;
@@ -45,7 +46,7 @@ function draw(){
     //clear previous drawing
     ctx.clearRect(0,0,1280,720);
 
-    //draw background
+    //draw 
     ctx.drawImage(gangst[i],pos[i][0], pos[i][1]);
 
 }
