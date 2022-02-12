@@ -2,13 +2,14 @@
 //character position and rendering
 
 //position
-const X = document.getElementById("x");
-const Y = document.getElementById("y");
-const Z = document.getElementById("z");
-let x,y,z;
+let X = document.getElementById("x");
+let Y = document.getElementById("y");
+let Z = document.getElementById("z");
+var x,y,z;
 let acl = new Accelerometer({frequency: 30});
 
 //canvas
+/*
 let canvas = document.getElementById("aug");
 let ctx = canvas.getContext("2d");
 ctx.globalAlpha=1;
@@ -18,15 +19,12 @@ let pos = [];
 let i=0;
 x=0;
 z=5;
-
+*/
 acl.addEventListener('reading', () => {
 
     x = Math.round(acl.x *10)/10;
     y = Math.round(acl.y *10)/10;
     z = Math.round(acl.z *10)/10;
-
-
-    
 
     X.textContent= x;
     Y.textContent= y;
@@ -35,7 +33,8 @@ acl.addEventListener('reading', () => {
 });
 
 acl.start();
-setInterval(loop,25)
+/*
+setInterval(loop,250)
 
 function loop(){
     pos[0]=640-100-x*6;
@@ -79,3 +78,4 @@ navigator.mediaDevices.getUserMedia(constraints)
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
+*/
