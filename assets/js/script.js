@@ -9,7 +9,7 @@ var x,y,z;
 let acl = new Accelerometer({frequency: 30});
 
 //canvas
-/*
+
 let canvas = document.getElementById("aug");
 let ctx = canvas.getContext("2d");
 ctx.globalAlpha=1;
@@ -19,7 +19,7 @@ let pos = [];
 let i=0;
 x=0;
 z=5;
-*/
+
 acl.addEventListener('reading', () => {
 
     x = Math.round(acl.x *10)/10;
