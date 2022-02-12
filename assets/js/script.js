@@ -15,10 +15,10 @@ let gangst = document.getElementById("image1");
 let pos = [];
 
 const video = document.querySelector('video');
-let w = screen.width;
-let h = screen.height;
-let midX=Math.round(w);
-let midY=Math.round(h);
+let w = window.innerWidth;
+let h = window.innerHeight;
+let midX=Math.round(w/2);
+let midY=Math.round(h/2);
 video.setAttribute("width",w);
 video.setAttribute("height",w);
 canvas.setAttribute("width",w);
@@ -44,10 +44,14 @@ acl.addEventListener('reading', () => {
 function draw(){
 
     //clear previous drawing
-    ctx.clearRect(0,0,w,w);
+    //ctx.clearRect(0,0,w,w);
 
     //draw 
     ctx.drawImage(gangst,pos[0], pos[1]);
+    ctx.fillStyle = "black";
+    ctx.fillRect(midX,midX,100,250);
+    ctx.fillStyle = "red";
+    ctx.fillRect(xx,xx,100,250);
 
 }
 
@@ -82,16 +86,14 @@ navigator.mediaDevices.getUserMedia(constraints)
     video.play();
     acl.start();
 
-    setInterval(loop,25);
-/*
+    //setInterval(loop,25);
+
     ctx.clearRect(0,0,w,w);
+
     let xx = Math.round(midX/2);
     //let yy = Math.round(midY/2);
-    ctx.fillStyle = "black";
-    ctx.fillRect(midX,midX,100,250);
-    ctx.fillStyle = "red";
-    ctx.fillRect(xx,xx,100,250);
-*/
+    
+
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
