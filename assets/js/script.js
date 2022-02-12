@@ -49,7 +49,7 @@ function loop(){
 function draw(){
 
     //clear previous drawing
-    //ctx.clearRect(0,0,1280,720);
+    ctx.clearRect(0,0,1280,720);
 
     //draw 
     ctx.drawImage(gangst,pos[0], pos[1]);
@@ -66,9 +66,7 @@ const constraints = {
     video: { 
         width: 1280, 
         height: 720,
-        facingMode: {
-            exact: 'environment'
-          }
+        
     } 
 };
 
