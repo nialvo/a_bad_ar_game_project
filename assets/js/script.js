@@ -16,9 +16,7 @@ ctx.globalAlpha=1;
 let gangst = document.getElementById("image1");
 let pos = [];
 
-let i=0;
-x=0;
-z=5;
+
 
 acl.addEventListener('reading', () => {
 
@@ -33,8 +31,7 @@ acl.addEventListener('reading', () => {
 });
 
 
-/*
-setInterval(loop,250)
+
 
 function loop(){
     pos[0]=640-100-x*6;
@@ -54,7 +51,7 @@ function draw(){
     ctx.drawImage(gangst,pos[0], pos[1]);
 
 }
-*/
+
 
 
 //video feed
@@ -76,6 +73,7 @@ navigator.mediaDevices.getUserMedia(constraints)
   video.onloadedmetadata = function(e) {
     video.play();
     acl.start();
+    setInterval(loop,250);
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
