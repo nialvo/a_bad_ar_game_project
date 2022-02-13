@@ -7,7 +7,7 @@ const Z = document.getElementById("z");
 let x = 1;//initial gangster position
 let y = 1;
 let z = 1;
-let i=0;//hold the new position (to use the old position for calculations without modifying it)
+let i=0;//new position 
 let j=0;
 let k=0;
 
@@ -91,12 +91,10 @@ function loop(){
     i=x*(a*a+b*b+c*c+d*d)+2*b*(y*c+z*d);
     j=y*(a*a+b*b+c*c+d*d)+2*c*(b*x+d*z);
     k=x*(a*a+b*b+c*c+d*d)+2*d*(b*x+y*c);
-    x=i;
-    y=j;
-    z=k;
-    X.innerText=Math.round(x*100)/100;
-    Y.innerText=Math.round(y*100)/100;
-    Z.innerText=Math.round(z*100)/100;
+    
+    X.innerText=Math.round(i*100)/100;
+    Y.innerText=Math.round(j*100)/100;
+    Z.innerText=Math.round(k*100)/100;
 
     
     //draw();
