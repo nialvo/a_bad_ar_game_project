@@ -20,7 +20,7 @@ sensor.addEventListener('reading', () => {
 
     for(let h=0;h<4;h++){
         q[h]=sensor.quaternion[h];
-        Q[h].textContent=q[h];
+        Q[h].textContent=Math.round(q[h]*100)/100;
 
     }
  
