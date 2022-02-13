@@ -5,6 +5,18 @@ let Y = document.getElementById("y");
 let Z = document.getElementById("z");
 var x,y,z;
 let acl = new Accelerometer({frequency: 30});
+//////or////////////////////////////////////////////
+let Q = document.getElementById("z");
+var q
+
+const options = { frequency: 30, referenceFrame: 'device' };
+const sensor = new AbsoluteOrientationSensor(options);
+
+sensor.addEventListener('reading', () => {
+ 
+  q=sensor.quaternion;
+  Q.textContent=q;
+});
 
 
 
@@ -54,7 +66,7 @@ function draw(){
     ctx.fillRect(midX,midX,100,250);
     ctx.fillStyle = "red";
     ctx.fillRect(xx,xx,100,250);
-
+    
 }
 
 
@@ -87,14 +99,28 @@ navigator.mediaDevices.getUserMedia(constraints)
   video.onloadedmetadata = function(e) {
     video.play();
     acl.start();
+    sensor.start();
 
     setInterval(loop,25);
 
-    
-
-   
-    
 
   };
 })
 .catch(function(err) { console.log("nooo"); }); 
+
+
+
+
+/*
+Promise.all([navigator.permissions.query({ name: "accelerometer" }),
+             navigator.permissions.query({ name: "magnetometer" }),
+             navigator.permissions.query({ name: "gyroscope" })])
+       .then(results => {
+         if (results.every(result => result.state === "granted")) {
+           sensor.start();
+           ...
+         } else {
+           console.log("No permissions to use AbsoluteOrientationSensor.");
+         }
+   });
+   */
