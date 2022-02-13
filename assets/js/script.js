@@ -4,10 +4,10 @@
 const X = document.getElementById("x");
 const Y = document.getElementById("y");
 const Z = document.getElementById("z");
-let x = 1;//initial gangster position
-let y = 1;
+let x = 0;//initial gangster direction (must be unit vector??)
+let y = 0;
 let z = 1;
-let i=0;//new position 
+let i=0;//new direction 
 let j=0;
 let k=0;
 
