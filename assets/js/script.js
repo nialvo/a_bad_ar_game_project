@@ -10,6 +10,7 @@ Q[0] = document.getElementById("q0");
 Q[1] = document.getElementById("q1");
 Q[2] = document.getElementById("q2");
 Q[3] = document.getElementById("q3");
+M = document.getElementById("m");
 
 
 const options = { frequency: 30, referenceFrame: 'device' };
@@ -20,6 +21,9 @@ sensor.addEventListener('reading', () => {
         q[h]=sensor.quaternion[h];
         Q[h].textContent=Math.round(q[h]*100)/100;
     } 
+    m=q[0]*q[0]+q[1]*q[1]+q[2]*q[2]+q[3]*q[3];
+    M.textContent=m;
+
 });
 
 
