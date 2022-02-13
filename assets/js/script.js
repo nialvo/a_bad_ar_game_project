@@ -6,16 +6,25 @@ let Z = document.getElementById("z");
 var x,y,z;
 let acl = new Accelerometer({frequency: 30});
 //////or////////////////////////////////////////////
-let Q = document.getElementById("z");
-var q
+let Q =new Array(4)
+Q[0] = document.getElementById("q0");
+Q[1] = document.getElementById("q1");
+Q[2] = document.getElementById("q2");
+Q[3] = document.getElementById("q3");
+let q =new Array(4);
 
 const options = { frequency: 30, referenceFrame: 'device' };
 const sensor = new AbsoluteOrientationSensor(options);
 
 sensor.addEventListener('reading', () => {
+
+    for(let h=0;h<4;h++){
+        q[h]=sensor.quaternion[h];
+        Q[h].textContent=q[h];
+
+    }
  
-  q=sensor.quaternion;
-  Q.textContent=q;
+  
 });
 
 
