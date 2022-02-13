@@ -2,6 +2,10 @@
 let Q =new Array(4)
 let q =new Array(4);
 
+for(let h=0;h<4;h++){
+    q[h]=0;
+} 
+
 Q[0] = document.getElementById("q0");
 Q[1] = document.getElementById("q1");
 Q[2] = document.getElementById("q2");
@@ -19,6 +23,34 @@ sensor.addEventListener('reading', () => {
 });
 
 
+
+
+const video = document.querySelector('video');
+
+
+
+
+const canvas = document.getElementById("aug");
+const ctx = canvas.getContext("2d");
+ctx.globalAlpha=1;
+let gangst = document.getElementById("image1");
+let pos = [];
+
+let w = window.innerWidth;
+let h = window.innerHeight;
+
+
+let midX=Math.round(w/2);
+let midY=Math.round(h/2);
+video.setAttribute("width",w);
+video.setAttribute("height",w);
+canvas.setAttribute("width",w);
+canvas.setAttribute("height",w);
+
+let xInc = Math.round(midX/.15);
+//let incY = Math.round(midY/5);
+
+
 const constraints = { 
     audio: false,
     video: { 
@@ -33,23 +65,6 @@ const constraints = {
 
 
 
-const canvas = document.getElementById("aug");
-const ctx = canvas.getContext("2d");
-ctx.globalAlpha=1;
-let gangst = document.getElementById("image1");
-let pos = [];
-const video = document.querySelector('video');
-
-let w = window.innerWidth;
-let h = window.innerHeight;
-let midX=Math.round(w/2);
-let midY=Math.round(h/2);
-video.setAttribute("width",w);
-video.setAttribute("height",w);
-canvas.setAttribute("width",w);
-canvas.setAttribute("height",w);
-let xInc = Math.round(midX/.15);
-//let incY = Math.round(midY/5);
 
 
 
@@ -66,8 +81,8 @@ function draw(){
 
 
 function loop(){
-    pos[0]=midX-100+(q[1])*xInc;
-    pos[1]=midX-250+(q[2]+.5)*xInc;
+    pos[0]=Math.round(midX-100+(q[1])*xInc);
+    pos[1]=Math.round(midX-250+(q[2]+.5)*xInc);
     draw();
 }
 
@@ -80,6 +95,7 @@ navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
 
     video.srcObject = mediaStream;
+
     video.onloadedmetadata = function(e) {
 
         video.play();
