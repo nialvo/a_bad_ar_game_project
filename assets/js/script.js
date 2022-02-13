@@ -47,7 +47,7 @@ video.setAttribute("height",w);
 canvas.setAttribute("width",w);
 canvas.setAttribute("height",w);
 
-let xInc = Math.round(midX/.15);
+let xInc = w/.3;
 //let incY = Math.round(midY/5);
 
 
@@ -82,7 +82,8 @@ function draw(){
 
 function loop(){
     pos[0]=Math.round(midX-100+(q[2])*xInc);
-    pos[1]=Math.round(midX-250+(q[1]+.5)*xInc);
+    pos[1]=Math.round(midX-250+(q[0]-.5)*xInc);
+    
     draw();
 }
 
