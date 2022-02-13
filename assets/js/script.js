@@ -81,8 +81,8 @@ function draw(){
 
 
 function loop(){
-    pos[0]=Math.round(midX-100+(q[1])*xInc);
-    pos[1]=Math.round(midX-250+(q[2]+.5)*xInc);
+    pos[0]=Math.round(midX-100+(q[2])*xInc);
+    pos[1]=Math.round(midX-250+(q[1]+.5)*xInc);
     draw();
 }
 
