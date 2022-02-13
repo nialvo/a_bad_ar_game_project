@@ -1,29 +1,31 @@
 
-let Q =new Array(4)
-let q =new Array(4);
 
-for(let h=0;h<4;h++){
-    q[h]=0;
-} 
 
-Q[0] = document.getElementById("q0");
-Q[1] = document.getElementById("q1");
-Q[2] = document.getElementById("q2");
-Q[3] = document.getElementById("q3");
-M = document.getElementById("m");
+const X = document.getElementById("x");
+const Y = document.getElementById("y");
+const Z = document.getElementById("z");
+let x = 1;//initial gangster position
+let y = 1;
+let z = 1;
+let i=0;//hold the new position (to use the old position for calculations without modifying it)
+let j=0;
+let k=0;
+
+let a=1;//initialize default quaternion (just to buffer till we get a reading)
+let b=0;
+let c=0;
+let d=0;
 
 
 const options = { frequency: 30, referenceFrame: 'device' };
 const sensor = new AbsoluteOrientationSensor(options);
 
 sensor.addEventListener('reading', () => {
-    for(let h=0;h<4;h++){
-        q[h]=sensor.quaternion[h];
-        Q[h].textContent=Math.round(q[h]*100)/100;
-    } 
-    m=q[0]*q[0]+q[1]*q[1]+q[2]*q[2]+q[3]*q[3];
-    M.textContent=m;
-
+    a=sensor.quaternion[0];
+    b=sensor.quaternion[1];
+    c=sensor.quaternion[2];
+    d=sensor.quaternion[3];
+    
 });
 
 
@@ -37,8 +39,8 @@ const video = document.querySelector('video');
 const canvas = document.getElementById("aug");
 const ctx = canvas.getContext("2d");
 ctx.globalAlpha=1;
-let gangst = document.getElementById("image1");
-let pos = [];
+//let gangst = document.getElementById("image1");
+
 
 let w = window.innerWidth;
 let h = window.innerHeight;
@@ -51,7 +53,7 @@ video.setAttribute("height",w);
 canvas.setAttribute("width",w);
 canvas.setAttribute("height",w);
 
-let xInc = w/.3;
+//let xInc = w/.3;
 //let incY = Math.round(midY/5);
 
 
@@ -74,7 +76,7 @@ const constraints = {
 
 
 
-
+/* hold on the gangster rendering for now
 
 function draw(){
     //clear previous drawing
@@ -82,13 +84,22 @@ function draw(){
     //draw 
     ctx.drawImage(gangst,pos[0], pos[1]);  
 }
-
+*/
 
 function loop(){
-    pos[0]=Math.round(midX-100+(q[2])*xInc);
-    pos[1]=Math.round(midX-250+(q[0]-.5)*xInc);
+    //multiply initial position by quaternion and inverse
+    i=x*(a*a+b*b+c*c+d*d)+2*b*(y*c+z*d);
+    j=y*(a*a+b*b+c*c+d*d)+2*c*(b*x+d*z);
+    k=x*(a*a+b*b+c*c+d*d)+2*d*(b*x+y*c);
+    x=i;
+    y=j;
+    z=k;
+    X.innerText=Math.round(x*100)/100;
+    Y.innerText=Math.round(y*100)/100;
+    Z.innerText=Math.round(z*100)/100;
+
     
-    draw();
+    //draw();
 }
 
 
