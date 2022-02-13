@@ -90,7 +90,7 @@ function loop(){
     //multiply initial position by quaternion and inverse
     i=x*(a*a+b*b+c*c+d*d)+2*b*(y*c+z*d);
     j=y*(a*a+b*b+c*c+d*d)+2*c*(b*x+d*z);
-    k=x*(a*a+b*b+c*c+d*d)+2*d*(b*x+y*c);
+    k=z*(a*a+b*b+c*c+d*d)+2*d*(b*x+y*c);
     
     X.innerText=Math.round(i*100)/100;
     Y.innerText=Math.round(j*100)/100;
