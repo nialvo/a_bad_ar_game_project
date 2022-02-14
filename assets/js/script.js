@@ -55,7 +55,7 @@ video.setAttribute("height",wid);
 canvas.setAttribute("width",wid);
 canvas.setAttribute("height",wid);
 
-let wInc = wid/5;
+let wInc = wid/7; //5 too small
 
 
 
