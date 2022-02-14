@@ -2,13 +2,17 @@ const xaEl = document.getElementById("xa");
 const yaEl = document.getElementById("ya");
 const zaEl = document.getElementById("za");
 
+let xa=0;//initialize default acceleration (just to buffer till we get a reading)
+let ya=0;
+let za=0;
 
-let laSensor = new LinearAccelerationSensor({frequency: 60});
+
+const laSensor = new LinearAccelerationSensor({frequency: 60});
 
 laSensor.addEventListener('reading', e => {
-  xaEl.textContent=laSensor.x;
-  yaEl.textContent=laSensor.y;
-  zaEl.textContent=laSensor.z;
+  xa=laSensor.x;
+  ya=laSensor.y;
+  za=laSensor.z;
   
 });
 
@@ -115,8 +119,11 @@ function loop(){
     pos[1]=midX-250+j*wInc;
 
 
+    xaEl.textContent=xa;
+    yaEl.textContent=ya;
+    zaEl.textContent=za;
+  
 
-    
     iEl.innerText=Math.round(i*100)/100;
     jEl.innerText=Math.round(j*100)/100;
     kEl.innerText=Math.round(k*100)/100;
