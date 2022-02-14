@@ -94,7 +94,15 @@ const constraints = {
 
 
 
-
+function polygon(px,py,col){
+    
+    ctx.fillStyle = col;
+    ctx.beginPath();
+    ctx.moveTo(px[0], py[0]);
+    for(let pts=1; pts<px.length; pts++) ctx.lineTo(px[pts],py[pts]);
+    ctx.closePath();
+    ctx.fill();
+}
 
 
 
@@ -119,9 +127,9 @@ function loop(){
     pos[1]=midX-250+j*wInc;
 
 
-    xaEl.textContent=xa;
-    yaEl.textContent=ya;
-    zaEl.textContent=za;
+    xaEl.textContent=Math.round(xa*10)/10;
+    yaEl.textContent=Math.round(ya*10)/10;
+    zaEl.textContent=Math.round(za*10)/10;
   
 
     iEl.innerText=Math.round(i*100)/100;
