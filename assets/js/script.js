@@ -47,7 +47,7 @@ let z=0;
 
 
 const options2 = { frequency: 60, referenceFrame: 'device' };
-const sensor2 = new RelativeOrientationSensor(options2);
+const sensor2 = new AbsoluteOrientationSensor(options2);
 
 sensor2.addEventListener('reading', () => {
     w=sensor2.quaternion[0];
@@ -55,6 +55,9 @@ sensor2.addEventListener('reading', () => {
     y=sensor2.quaternion[2];
     z=sensor2.quaternion[3];
 });
+
+
+
 
 
 
@@ -139,9 +142,9 @@ function loop(){
     k=I*(x*z-w*y)+J*2*(w*x+y*z)+K*(1-2*(x*x+y*y));
 
     //assign new position to old 
-    I=i;
-    J=j;
-    K=k;
+    //I=i;
+    //J=j;
+    //K=k;
 
 
     pos[0]=midX-100+k*wInc;
