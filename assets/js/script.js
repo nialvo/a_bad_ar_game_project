@@ -10,6 +10,8 @@ let xs=0;//initialize default speed
 let ys=0;
 let zs=0;
 
+const sf=.1; //speed factor, this will prob get dissolved when we use proper projection
+
 const laSensor = new LinearAccelerationSensor({frequency: 60});
 
 laSensor.addEventListener('reading', e => {
@@ -43,18 +45,7 @@ let z=0;
 
 
 
-const options = { frequency: 30, referenceFrame: 'device' };
-const sensor = new AbsoluteOrientationSensor(options);
 
-/*sensor.addEventListener('reading', () => {
-    w=sensor.quaternion[0];
-    x=sensor.quaternion[1];
-    y=sensor.quaternion[2];
-    z=sensor.quaternion[3];
-    
-});*/
-
-/////////////////experimentaal zoone/////////////////////////
 const options2 = { frequency: 60, referenceFrame: 'device' };
 const sensor2 = new RelativeOrientationSensor(options2);
 
@@ -65,10 +56,7 @@ sensor2.addEventListener('reading', () => {
     z=sensor2.quaternion[3];
 });
 
-//sensor2.start();
 
-
-////////////////////end of experimentaal zoone///////////
 
 
 const video = document.querySelector('video');
@@ -133,18 +121,24 @@ function draw(){
 }
 
 function loop(){
-/*
+
     xs+=xa;//adjust speed
     ys+=ya;
     zs+=za;
-*/
+
+    //translate
+    I+=xs*sf;
+    J+=ys*sf;
+    K+=zs*sf;
 
 
 
+    //rotate
     i=I*(1-2*(y*y+z*z))+J*2*(x*y-w*z)+K*2*(w*y+x*z);// quaternion rotation matrix * original position
     j=I*2*(x*y+w*z)+J*(1-2*(x*x+z*z))+K*2*(y*z-w*x);
     k=I*(x*z-w*y)+J*2*(w*x+y*z)+K*(1-2*(x*x+y*y));
 
+    //assign new position to old 
     I=i;
     J=j;
     K=k;
