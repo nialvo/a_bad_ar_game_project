@@ -14,7 +14,7 @@ let dx=0;//initialize default rotated speed
 let dy=0;
 let dz=0;
 
-const sf=1; //speed factor, this will prob get dissolved when we use proper projection
+const sf=50; //speed factor, this will prob get dissolved when we use proper projection
 
 const laSensor = new LinearAccelerationSensor({frequency: 60});
 
