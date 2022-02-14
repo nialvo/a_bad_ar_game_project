@@ -6,6 +6,9 @@ let xa=0;//initialize default acceleration (just to buffer till we get a reading
 let ya=0;
 let za=0;
 
+let xs=0;//initialize default speed
+let ys=0;
+let zs=0;
 
 const laSensor = new LinearAccelerationSensor({frequency: 60});
 
@@ -23,35 +26,49 @@ const iEl = document.getElementById("i");
 const jEl = document.getElementById("j");
 const kEl = document.getElementById("k");
 
-
-
-let I = 5;//initial gangster coordinates 
+let I = 5;//initialize unrotated untranslated gangster coordinates 
 let J = 5;
 let K = 5;
-let i=0;//new coordinates 
+let i=0;//rotated coordinates 
 let j=0;
 let k=0;
+let pi=0;//
+let pj=0;
+let pk=0;
 
 let w=1;//initialize default quaternion (just to buffer till we get a reading)
 let x=0;
 let y=0;
 let z=0;
 
-let pos=[];
 
 
 const options = { frequency: 30, referenceFrame: 'device' };
 const sensor = new AbsoluteOrientationSensor(options);
 
-sensor.addEventListener('reading', () => {
+/*sensor.addEventListener('reading', () => {
     w=sensor.quaternion[0];
     x=sensor.quaternion[1];
     y=sensor.quaternion[2];
     z=sensor.quaternion[3];
     
+});*/
+
+/////////////////experimentaal zoone/////////////////////////
+const options2 = { frequency: 60, referenceFrame: 'device' };
+const sensor2 = new RelativeOrientationSensor(options2);
+
+sensor2.addEventListener('reading', () => {
+    w=sensor2.quaternion[0];
+    x=sensor2.quaternion[1];
+    y=sensor2.quaternion[2];
+    z=sensor2.quaternion[3];
 });
 
+//sensor2.start();
 
+
+////////////////////end of experimentaal zoone///////////
 
 
 const video = document.querySelector('video');
@@ -108,35 +125,42 @@ function polygon(px,py,col){
 
 
 
+let pos=[];
 
 function draw(){
-    //clear previous drawing
-    ctx.clearRect(0,0,wid,wid);
-    //draw 
-    ctx.drawImage(gangst,pos[0], pos[1]);  
+    ctx.clearRect(0,0,wid,wid);//clear previous drawing
+    ctx.drawImage(gangst,pos[0], pos[1]);//draw  
 }
 
-
 function loop(){
-    // quaternion rotation matrix * original position
-    i=I*(1-2*(y*y+z*z))+J*2*(x*y-w*z)+K*2*(w*y+x*z);
+/*
+    xs+=xa;//adjust speed
+    ys+=ya;
+    zs+=za;
+*/
+
+
+
+    i=I*(1-2*(y*y+z*z))+J*2*(x*y-w*z)+K*2*(w*y+x*z);// quaternion rotation matrix * original position
     j=I*2*(x*y+w*z)+J*(1-2*(x*x+z*z))+K*2*(y*z-w*x);
     k=I*(x*z-w*y)+J*2*(w*x+y*z)+K*(1-2*(x*x+y*y));
 
+    I=i;
+    J=j;
+    K=k;
+
+
     pos[0]=midX-100+k*wInc;
     pos[1]=midX-250+j*wInc;
-
 
     xaEl.textContent=Math.round(xa*10)/10;
     yaEl.textContent=Math.round(ya*10)/10;
     zaEl.textContent=Math.round(za*10)/10;
   
-
     iEl.innerText=Math.round(i*100)/100;
     jEl.innerText=Math.round(j*100)/100;
     kEl.innerText=Math.round(k*100)/100;
 
-    
     draw();
 }
 
@@ -151,12 +175,10 @@ navigator.mediaDevices.getUserMedia(constraints)
     video.srcObject = mediaStream;
 
     video.onloadedmetadata = function(e) {
-
         video.play();
-        sensor.start();
+        sensor2.start();//2 is for experiment
         laSensor.start();
         setInterval(loop,25);
-
     };
 })
 .catch(function() { console.log("nooo"); }); 
