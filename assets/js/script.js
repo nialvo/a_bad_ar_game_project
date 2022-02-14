@@ -1,9 +1,26 @@
+const xaEl = document.getElementById("xa");
+const yaEl = document.getElementById("ya");
+const zaEl = document.getElementById("za");
+
+
+let laSensor = new LinearAccelerationSensor({frequency: 60});
+
+laSensor.addEventListener('reading', e => {
+  xaEl.textContent=laSensor.x;
+  yaEl.textContent=laSensor.y;
+  zaEl.textContent=laSensor.z;
+  
+});
+
 
 
 
 const iEl = document.getElementById("i");
 const jEl = document.getElementById("j");
 const kEl = document.getElementById("k");
+
+
+
 let I = 5;//initial gangster coordinates 
 let J = 5;
 let K = 5;
@@ -122,11 +139,12 @@ navigator.mediaDevices.getUserMedia(constraints)
 
         video.play();
         sensor.start();
+        laSensor.start();
         setInterval(loop,25);
 
     };
 })
-.catch(function(err) { console.log("nooo"); }); 
+.catch(function() { console.log("nooo"); }); 
 
 
 
