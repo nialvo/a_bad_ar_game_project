@@ -10,7 +10,7 @@ let xs=0;//initialize default speed
 let ys=0;
 let zs=0;
 
-const sf=50; //speed factor, this will prob get dissolved when we use proper projection
+const sf=5000; //speed factor, this will prob get dissolved when we use proper projection
 
 const laSensor = new LinearAccelerationSensor({frequency: 60});
 
