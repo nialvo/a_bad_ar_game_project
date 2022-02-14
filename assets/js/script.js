@@ -121,10 +121,14 @@ function polygon(px,py,col){
 
 
 let pos=[];
+ctx.fillStyle = "red";
+let ex =0;
+let ey =0;
 
 function draw(){
     ctx.clearRect(0,0,wid,wid);//clear previous drawing
-    ctx.drawImage(gangst,pos[0], pos[1]);//draw  
+    //ctx.drawImage(gangst,pos[0], pos[1]);//draw  
+    ctx.fillRect(midX+ex, midX+ey, 20,20);
 }
 
 function loop(){
@@ -133,15 +137,15 @@ function loop(){
     ys+=ya;
     zs+=za;
 
+    ex+=xs*sf;
+    ey+=ys*sf;
+
     //rotate translation
     dx=xs*(1-2*(y*y+z*z))+ys*2*(x*y-w*z)+zs*2*(w*y+x*z);// quaternion rotation matrix * original position
     dy=xs*2*(x*y+w*z)+ys*(1-2*(x*x+z*z))+zs*2*(y*z-w*x);
     dz=xs*(x*z-w*y)+ys*2*(w*x+y*z)+zs*(1-2*(x*x+y*y));
 
-    //good luck and patience
-    xs/=2;
-    ys/=2;
-    zs/=2;
+    
 
 
     //translate
@@ -183,8 +187,8 @@ navigator.mediaDevices.getUserMedia(constraints)
     video.srcObject = mediaStream;
 
     video.onloadedmetadata = function(e) {
-        video.play();
-        sensor2.start();//2 is for experiment
+        //video.play();
+        //sensor2.start();//2 is for experiment
         laSensor.start();
         setInterval(loop,25);
     };
