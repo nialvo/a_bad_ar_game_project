@@ -6,11 +6,15 @@ let xa=0;//initialize default acceleration (just to buffer till we get a reading
 let ya=0;
 let za=0;
 
-let xs=0;//initialize default speed
+let xs=0;//initialize unrotated default speed
 let ys=0;
 let zs=0;
 
-const sf=.005; //speed factor, this will prob get dissolved when we use proper projection
+let dx=0;//initialize default rotated speed
+let dy=0;
+let dz=0;
+
+const sf=.01; //speed factor, this will prob get dissolved when we use proper projection
 
 const laSensor = new LinearAccelerationSensor({frequency: 60});
 
@@ -129,22 +133,23 @@ function loop(){
     ys+=ya;
     zs+=za;
 
+    //rotate translation
+    dx=xs*(1-2*(y*y+z*z))+ys*2*(x*y-w*z)+zs*2*(w*y+x*z);// quaternion rotation matrix * original position
+    dy=xs*2*(x*y+w*z)+ys*(1-2*(x*x+z*z))+zs*2*(y*z-w*x);
+    dz=xs*(x*z-w*y)+ys*2*(w*x+y*z)+zs*(1-2*(x*x+y*y));
+
     //translate
-    I+=xs*sf;
-    J+=ys*sf;
-    K+=zs*sf;
+    I+=dx*sf;
+    J+=dy*sf;
+    K+=dz*sf;
 
 
 
-    //rotate
+    //rotate point
     i=I*(1-2*(y*y+z*z))+J*2*(x*y-w*z)+K*2*(w*y+x*z);// quaternion rotation matrix * original position
     j=I*2*(x*y+w*z)+J*(1-2*(x*x+z*z))+K*2*(y*z-w*x);
     k=I*(x*z-w*y)+J*2*(w*x+y*z)+K*(1-2*(x*x+y*y));
 
-    //assign new position to old 
-    //I=i;
-    //J=j;
-    //K=k;
 
 
     pos[0]=midX-100+k*wInc;
