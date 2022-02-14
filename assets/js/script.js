@@ -1,30 +1,30 @@
 
 
 
-const X = document.getElementById("x");
-const Y = document.getElementById("y");
-const Z = document.getElementById("z");
-let x = 0;//initial gangster direction (must be unit vector??)
-let y = 0;
-let z = 1;
-let i=0;//new direction 
+const iEl = document.getElementById("i");
+const jEl = document.getElementById("j");
+const kEl = document.getElementById("k");
+let I = 5;//initial gangster coordinates 
+let J = 5;
+let K = 5;
+let i=0;//new coordinates 
 let j=0;
 let k=0;
 
-let a=1;//initialize default quaternion (just to buffer till we get a reading)
-let b=0;
-let c=0;
-let d=0;
+let w=1;//initialize default quaternion (just to buffer till we get a reading)
+let x=0;
+let y=0;
+let z=0;
 
 
 const options = { frequency: 30, referenceFrame: 'device' };
 const sensor = new AbsoluteOrientationSensor(options);
 
 sensor.addEventListener('reading', () => {
-    a=sensor.quaternion[0];
-    b=sensor.quaternion[1];
-    c=sensor.quaternion[2];
-    d=sensor.quaternion[3];
+    w=sensor.quaternion[0];
+    x=sensor.quaternion[1];
+    y=sensor.quaternion[2];
+    z=sensor.quaternion[3];
     
 });
 
@@ -42,16 +42,16 @@ ctx.globalAlpha=1;
 //let gangst = document.getElementById("image1");
 
 
-let w = window.innerWidth;
-let h = window.innerHeight;
+let wid = window.innerWidth;
+let hei = window.innerHeight;
 
 
-let midX=Math.round(w/2);
-let midY=Math.round(h/2);
-video.setAttribute("width",w);
-video.setAttribute("height",w);
-canvas.setAttribute("width",w);
-canvas.setAttribute("height",w);
+let midX=Math.round(wid/2);
+let midY=Math.round(hei/2);
+video.setAttribute("width",wid);
+video.setAttribute("height",wid);
+canvas.setAttribute("width",wid);
+canvas.setAttribute("height",wid);
 
 //let xInc = w/.3;
 //let incY = Math.round(midY/5);
@@ -60,8 +60,8 @@ canvas.setAttribute("height",w);
 const constraints = { 
     audio: false,
     video: { 
-        width: w, 
-        height: w,
+        width: wid, 
+        height: wid,
         facingMode: {
             exact: 'environment'
         }
@@ -87,14 +87,14 @@ function draw(){
 */
 
 function loop(){
-    //multiply initial position by quaternion and inverse
-    i=x*(a*a+b*b+c*c+d*d)+2*b*(y*c+z*d);
-    j=y*(a*a+b*b+c*c+d*d)+2*c*(b*x+d*z);
-    k=x*(a*a+b*b+c*c+d*d)+2*d*(b*x+y*c);
+    // quaternion rotation matrix * original position
+    i=I*(1-2*(y*y+z*z))+J*2*(x*y-w*z)+K*2*(w*y+x*z);
+    j=I*2*(x*y+w*z)+J*(1-2*(x*x+z*z))+K*2*(y*z-w*x);
+    k=I*(x*z-w*y)+J*2*(w*x+y*z)+K*(1-2*(x*x+y*y));
     
-    X.innerText=Math.round(i*100)/100;
-    Y.innerText=Math.round(j*100)/100;
-    Z.innerText=Math.round(k*100)/100;
+    iEl.innerText=Math.round(i*100)/100;
+    jEl.innerText=Math.round(j*100)/100;
+    kEl.innerText=Math.round(k*100)/100;
 
     
     //draw();
