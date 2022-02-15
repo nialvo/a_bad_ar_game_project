@@ -16,7 +16,7 @@ let dz=0;
 
 const sf=3; //speed factor, this might get dissolved when we use proper projection
 
-const laSensor = new LinearAccelerationSensor({frequency: 60});
+const laSensor = new LinearAccelerationSensor({frequency: 100});
 
 laSensor.addEventListener('reading', e => {
   xa=laSensor.x;
@@ -190,7 +190,7 @@ navigator.mediaDevices.getUserMedia(constraints)
         //video.play();
         //sensor2.start();//2 is for experiment
         laSensor.start();
-        setInterval(loop,25);
+        setInterval(loop,10);
     };
 })
 .catch(function() { console.log("nooo"); }); 
