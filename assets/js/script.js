@@ -16,7 +16,7 @@ let dz=0;
 
 const sf=1.2; //was 3 then .8 speed factor, this might get dissolved when we use proper projection
 
-const laSensor = new LinearAccelerationSensor({frequency: 100});
+const laSensor = new LinearAccelerationSensor({frequency: 50});
 
 laSensor.addEventListener('reading', e => {
   xa=laSensor.x;
@@ -31,7 +31,7 @@ laSensor.addEventListener('reading', e => {
 const iEl = document.getElementById("i");
 const jEl = document.getElementById("j");
 const kEl = document.getElementById("k");
-
+/*
 let I = 5;//initialize unrotated untranslated gangster coordinates 
 let J = 5;
 let K = 5;
@@ -60,7 +60,7 @@ sensor2.addEventListener('reading', () => {
     z=sensor2.quaternion[3];
 });
 
-
+*/
 
 
 
@@ -107,7 +107,7 @@ const constraints = {
 };
 
 
-
+/*
 function polygon(px,py,col){
     
     ctx.fillStyle = col;
@@ -117,15 +117,16 @@ function polygon(px,py,col){
     ctx.closePath();
     ctx.fill();
 }
+*/
 
 
 
 
-
-let pos=[];
+//let pos=[];
 ctx.fillStyle = "red";
 let ex =0;
 let ey =0;
+let ez =0;
 
 function draw(){
     ctx.clearRect(0,0,wid,wid);//clear previous drawing
@@ -139,17 +140,19 @@ function loop(){
     ys+=ya;
     zs+=za;
 
-    ex+=xs*sf;
-    ey+=ys*sf;
+    /*
 
     //rotate translation
     dx=xs*(1-2*(y*y+z*z))+ys*2*(x*y-w*z)+zs*2*(w*y+x*z);// quaternion rotation matrix * original position
     dy=xs*2*(x*y+w*z)+ys*(1-2*(x*x+z*z))+zs*2*(y*z-w*x);
     dz=xs*(x*z-w*y)+ys*2*(w*x+y*z)+zs*(1-2*(x*x+y*y));
-
+*/
+    ex+=xs*sf;
+    ey+=ys*sf;
+    ez+=ys*sf;
     
 
-
+/*
     //translate
     I+=dx*sf;
     J+=dy*sf;
@@ -166,14 +169,14 @@ function loop(){
 
     pos[0]=midX-100+k*wInc;
     pos[1]=midX-250+j*wInc;
-
+*/
     xaEl.textContent=Math.round(xs*10)/10;
     yaEl.textContent=Math.round(ys*10)/10;
     zaEl.textContent=Math.round(zs*10)/10;
   
-    iEl.innerText=Math.round(i*100)/100;
-    jEl.innerText=Math.round(j*100)/100;
-    kEl.innerText=Math.round(k*100)/100;
+    iEl.innerText=Math.round(ex*100)/100;
+    jEl.innerText=Math.round(ez*100)/100;
+    kEl.innerText=Math.round(ey*100)/100;
 
     draw();
 }
@@ -192,7 +195,7 @@ navigator.mediaDevices.getUserMedia(constraints)
         //video.play();
         //sensor2.start();//2 is for experiment
         laSensor.start();
-        setInterval(loop,10);
+        setInterval(loop,20);
     };
 })
 .catch(function() { console.log("nooo"); }); 
