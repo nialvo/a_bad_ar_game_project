@@ -151,9 +151,9 @@ function loop(){
     ey+=ys*sf;
     ez+=ys*sf;
 
-    xs*=.9;
-    ys*=.9;
-    zs*=.9;
+    xs*=.98;
+    ys*=.98;
+    zs*=.98;
 
 /*
     //translate
