@@ -14,7 +14,7 @@ let dx=0;//initialize default rotated speed
 let dy=0;
 let dz=0;
 
-const sf=3; //was 8 then .8 speed factor, this might get dissolved when we use proper projection
+const sf=1.2; //was 3 then .8 speed factor, this might get dissolved when we use proper projection
 
 const laSensor = new LinearAccelerationSensor({frequency: 100});
 
@@ -95,6 +95,8 @@ let wInc = wid/7; //5 too small
 const constraints = { 
     audio: false,
     video: { 
+        videoKind: {exact: "depth"},
+        
         width: wid, 
         height: wid,
         facingMode: {
