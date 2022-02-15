@@ -14,7 +14,7 @@ let dx=0;//initialize default rotated speed
 let dy=0;
 let dz=0;
 
-const sf=4; //speed factor, this might get dissolved when we use proper projection
+const sf=1; //speed factor, this might get dissolved when we use proper projection
 
 const laSensor = new LinearAccelerationSensor({frequency: 60});
 
@@ -137,8 +137,8 @@ function loop(){
     ys+=ya;
     zs+=za;
 
-    ex+=xs*sf;
-    ey+=ys*sf;
+    ex+=ys*sf;
+    ey+=xs*sf;
 
     //rotate translation
     dx=xs*(1-2*(y*y+z*z))+ys*2*(x*y-w*z)+zs*2*(w*y+x*z);// quaternion rotation matrix * original position
