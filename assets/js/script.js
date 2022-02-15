@@ -14,7 +14,7 @@ let dx=0;//initialize default rotated speed
 let dy=0;
 let dz=0;
 
-const sf=1.2; //was 3 then .8 speed factor, this might get dissolved when we use proper projection
+
 
 const laSensor = new LinearAccelerationSensor({frequency: 50});
 
@@ -133,7 +133,7 @@ function draw(){
     //ctx.drawImage(gangst,pos[0], pos[1]);//draw  
     ctx.fillRect(midX-ex, midX+ey, 20,20);
 }
-
+const sf=1; //was 3 then .8 speed factor, this might get dissolved when we use proper projection
 function loop(){
 
     xs+=xa;//adjust speed
@@ -150,7 +150,10 @@ function loop(){
     ex+=xs*sf;
     ey+=ys*sf;
     ez+=ys*sf;
-    
+
+    xs*=.9;
+    ys*=.9;
+    zs*=.9;
 
 /*
     //translate
