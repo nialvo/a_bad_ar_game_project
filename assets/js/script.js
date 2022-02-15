@@ -167,9 +167,9 @@ function loop(){
     pos[0]=midX-100+k*wInc;
     pos[1]=midX-250+j*wInc;
 
-    xaEl.textContent=Math.round(xa*10)/10;
-    yaEl.textContent=Math.round(ya*10)/10;
-    zaEl.textContent=Math.round(za*10)/10;
+    xaEl.textContent=Math.round(xs*10)/10;
+    yaEl.textContent=Math.round(ys*10)/10;
+    zaEl.textContent=Math.round(zs*10)/10;
   
     iEl.innerText=Math.round(i*100)/100;
     jEl.innerText=Math.round(j*100)/100;
