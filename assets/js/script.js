@@ -14,7 +14,9 @@ let dx=0;//initialize default rotated speed
 let dy=0;
 let dz=0;
 
-
+let xf=0
+let yf=0;
+let zf=0;
 
 const laSensor = new LinearAccelerationSensor({frequency: 50});
 
@@ -136,9 +138,29 @@ function draw(){
 const sf=1; //was 3 then .8 speed factor, this might get dissolved when we use proper projection
 function loop(){
 
-    xs+=xa;//adjust speed
-    ys+=ya;
-    zs+=za;
+    if(xa>.01){
+        xf=1;
+        xs+=xa;
+    }
+    if(xa<-.01&&xf==1){
+        xf=0;
+        xs=0;
+    }
+    if(xa<-.01){
+        xf=-1;
+        xs+=xa;
+    }
+    if(xa>.01&&xf==-1){
+        xf=0;
+        xs=0;
+    }
+    
+
+
+
+    //adjust speed
+    //ys+=ya;
+    //zs+=za;
 
     /*
 
@@ -173,9 +195,9 @@ function loop(){
     pos[0]=midX-100+k*wInc;
     pos[1]=midX-250+j*wInc;
 */
-    xaEl.textContent=Math.round(xs*10)/10;
-    yaEl.textContent=Math.round(ys*10)/10;
-    zaEl.textContent=Math.round(zs*10)/10;
+    xaEl.textContent=Math.round(xa*10)/10;
+    yaEl.textContent=Math.round(ya*10)/10;
+    zaEl.textContent=Math.round(za*10)/10;
   
     iEl.innerText=Math.round(ex*100)/100;
     jEl.innerText=Math.round(ez*100)/100;
