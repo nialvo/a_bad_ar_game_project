@@ -128,7 +128,7 @@ let ey =0;
 function draw(){
     ctx.clearRect(0,0,wid,wid);//clear previous drawing
     //ctx.drawImage(gangst,pos[0], pos[1]);//draw  
-    ctx.fillRect(midX+ex, midX+ey, 20,20);
+    ctx.fillRect(midX-ex, midX+ey, 20,20);
 }
 
 function loop(){
